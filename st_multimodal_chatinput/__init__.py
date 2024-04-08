@@ -13,7 +13,7 @@ else:
     build_dir = os.path.join(parent_dir, "frontend/build")
     _component_func = components.declare_component("st_multimodal_chatinput", path=build_dir)
 
-def multimodal_chatinput(default=None, disabled=False, key=None):
+def multimodal_chatinput(default=None, disabled=False, key=None, text_color="white"):
     """
     Create and return a new instance of the "multimodal_chatinput" component.
 
@@ -38,6 +38,6 @@ def multimodal_chatinput(default=None, disabled=False, key=None):
         }
         This dictionary contains the paths of the uploaded images and the text currently present in the chat input. The 'uploadedImages' key is a list of strings representing the uploaded images, and 'textInput' is a string representing the current text input.
     """
-    component_value = _component_func(disabled=disabled, default=default)
+    component_value = _component_func(disabled=disabled, default=default, text_color=text_color)
 
     return component_value
