@@ -27,7 +27,8 @@ reconfig_chatinput()
 ##############################################################################
 
 with st.container():
-    user_inp = multimodal_chatinput()
+    text_color = st.selectbox("Text Color", ["white", "black", "blue", "green", "purple"])
+    user_inp = multimodal_chatinput(text_color=text_color)
 
 if user_inp:
     st.write(user_inp)
