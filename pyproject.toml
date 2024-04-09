@@ -9,8 +9,7 @@ packages = ["st-multimodal-chatinput"]
 name = "st-multimodal-chatinput"
 version = "0.1.7"
 description = "Streamlit component that allows you to accept multi-modal inputs through a chat interface."
-authors = [{ name = "Het Patel", email = "2522het.patel@gmail.com" }]
-
+authors = ["Het Patel <2522het.patel@gmail.com>"]
 license = { file = "LICENSE" }
 readme = "README.md"
 homepage = "https://github.com/het-25/st-multimodal-chatinput"
