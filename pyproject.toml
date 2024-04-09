@@ -10,12 +10,17 @@ name = "st-multimodal-chatinput"
 version = "0.1.7"
 description = "Streamlit component that allows you to accept multi-modal inputs through a chat interface."
 authors = ["Het Patel <2522het.patel@gmail.com>"]
-license = "MIT"
+license = { file = "LICENSE" }
 readme = "README.md"
 homepage = "https://github.com/het-25/st-multimodal-chatinput"
 repository = "https://github.com/het-25/st-multimodal-chatinput"
 documentation = "https://github.com/het-25/st-multimodal-chatinput"
-classifiers = []
+classifiers = [
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+]
+keywords = ["streamlit", "multimodal", "streamlit-component"]
 requires-python = ">=3.7"
 dependencies = [
     "streamlit>=0.63"
