@@ -1,0 +1,12 @@
+build/
+dist/
+node_modules/
+node/
+st_multimodal_chatinput.egg-info/
+artifacts/
+video.webm
+todo.txt
+Dockerfile
+docker-compose.yml
+.gitignore
+.dockerignore

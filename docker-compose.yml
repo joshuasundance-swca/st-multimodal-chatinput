@@ -7,8 +7,10 @@ services:
       target: streamlitapp
     ports:
       - "8501:8501"
-    command: [
-      "streamlit", "run", "example.py",
-      "--server.port=8501",
-      "--server.address=0.0.0.0",
-    ]
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: artifactbuilder
+    volumes:
+      - ./artifacts:/st_multimodal_chatinput_artifacts
