@@ -1,10 +1,13 @@
 [build-system]
-requires = ["poetry-core>=1.0.0"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
-[tool.poetry]
+[tool.setuptools]
+packages = ["st-multimodal-chatinput"]
+
+[project]
 name = "st-multimodal-chatinput"
-version = "0.1.0"
+version = "0.1.7"
 description = "Streamlit component that allows you to accept multi-modal inputs through a chat interface."
 authors = ["Het Patel <2522het.patel@gmail.com>"]
 license = "MIT"
@@ -13,14 +16,13 @@ homepage = "https://github.com/het-25/st-multimodal-chatinput"
 repository = "https://github.com/het-25/st-multimodal-chatinput"
 documentation = "https://github.com/het-25/st-multimodal-chatinput"
 classifiers = []
+requires-python = ">=3.7"
+dependencies = [
+    "streamlit>=0.63"
+]
 
-[tool.poetry.dependencies]
-python = "^3.7"
-streamlit = "^0.63"
-
-[tool.poetry.dev-dependencies]
-pytest = "^7.4.0"
-wheel = "^0.36.2"
-
-[build]
-builder = "pypa/manylinux2014_x86_64"
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "wheel>=0.36.2"
+]
