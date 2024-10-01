@@ -134,7 +134,7 @@ class MultimodalChatInput extends StreamlitComponentBase<State> {
             onChange={this.handleInputChange}
             onPaste={this.handlePaste}
             placeholder={placeholder}
-            style={{ flexGrow: 1, padding: "8px", borderRadius: "8px", border: "1px solid gray", backgroundColor: "transparent", resize: "none", overflow: "auto", color: textColor, ...(isdisabled ? this.disabledStyle : {}) }}
+            style={{ flexGrow: 1, padding: "8px", borderRadius: "8px", border: "1px solid gray", backgroundColor: "transparent", resize: "none", overflow: "auto", color: textColor, ...(isDisabled ? this.disabledStyle : {}) }}
             onKeyDown={e => {
               if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
