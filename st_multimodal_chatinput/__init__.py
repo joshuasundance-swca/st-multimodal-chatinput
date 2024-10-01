@@ -1,7 +1,8 @@
 import os
 import streamlit.components.v1 as components
-_RELEASE = True
+import base64
 
+_RELEASE = True
 
 if not _RELEASE:
     _component_func = components.declare_component(
@@ -13,11 +14,14 @@ else:
     build_dir = os.path.join(parent_dir, "frontend/build")
     _component_func = components.declare_component("st_multimodal_chatinput", path=build_dir)
 
-def multimodal_chatinput(default=None, disabled=False, key=None, text_color="white"):
+def multimodal_chatinput(default=None, disabled=False, key=None, placeholder="Ask me anything..", text_color="white"):
     """
     Create and return a new instance of the "multimodal_chatinput" component.
 
-    This function initializes and renders a multimodal chat input component, which may include functionalities for handling text input and image uploads. The component's interactivity can be enabled or disabled. The function returns a dictionary containing the current state of the chat input, specifically the text input and any uploaded images.
+    This function initializes and renders a multimodal chat input component, which includes
+    functionalities for handling text input, image uploads, and document uploads (PDF, DOCX, XLSX).
+    The component's interactivity can be enabled or disabled. The function returns a dictionary
+    containing the current state of the chat input, specifically the text input and any uploaded files.
 
     Parameters
     ----------
@@ -33,11 +37,25 @@ def multimodal_chatinput(default=None, disabled=False, key=None, text_color="whi
     dict
         A dictionary with the following structure:
         {
-            'uploadedImages': list of base64 encoding of uploaded images,
+            'uploadedFiles': list of dictionaries containing file information,
+            'uploadedImages': list of base64 encoding of uploaded images (for backward compatibility),
             'textInput': str
         }
-        This dictionary contains the paths of the uploaded images and the text currently present in the chat input. The 'uploadedImages' key is a list of strings representing the uploaded images, and 'textInput' is a string representing the current text input.
+        Each file dictionary in 'uploadedFiles' has the following structure:
+        {
+            'name': str (filename),
+            'type': str (MIME type),
+            'content': str (base64 encoded file content)
+        }
+        'uploadedImages' contains only the base64 encoded content of image files.
+        'textInput' is a string representing the current text input.
     """
-    component_value = _component_func(disabled=disabled, default=default, text_color=text_color)
+    component_value = _component_func(disabled=disabled, default=default, placeholder=placeholder, text_color=text_color)
 
+    # Ensure backward compatibility for uploadedImages
+    if component_value is not None and 'uploadedFiles' in component_value:
+        component_value['uploadedImages'] = [
+            file['content'] for file in component_value['uploadedFiles']
+            if file['type'].startswith('image/')
+        ]
     return component_value

@@ -4,3 +4,6 @@ node_modules/
 node/
 st_multimodal_chatinput.egg-info/
 artifacts/
+.DS_Store
+venv/
+*.pyc

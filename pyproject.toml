@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "st-multimodal-chatinput"
-version = "0.1.7"
+version = "0.2.0"
 description = "Streamlit component that allows you to accept multi-modal inputs through a chat interface."
 authors = [
   {name = "Het Patel", email = "2522het.patel@gmail.com"},
