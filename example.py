@@ -29,7 +29,7 @@ with top:
         for inp in history_without_current:
             st.write(inp)
 
-    if any(user_inp.values()):
+    if user_inp and any(user_inp.values()):
         st.session_state.input_history.append(user_inp)
         st.session_state.current_input = user_inp
     else:
