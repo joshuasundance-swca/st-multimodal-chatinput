@@ -1,34 +1,41 @@
 import streamlit as st
 from st_multimodal_chatinput import multimodal_chatinput
 
- ##hack to make sure that chatinput is always at the bottom of the page
- ##will only work if multimodal_chatinput is called inside the first st.container of the page
+if "input_history" not in st.session_state:
+    st.session_state.input_history = []
 
- ##############################################################################
-def reconfig_chatinput():
-    st.markdown(
-        """
-    <style>
-        div[data-testid="stVerticalBlock"] div[data-testid="stVerticalBlock"]:first-of-type {
-            position: fixed;
-            bottom: 0;
-            width: 100%; /* Span the full width of the viewport */;
-            background-color: #0E117;
-            z-index: 1000;
-            /* Other styles as needed */    
-        }
-    </style>
-    """,
-        unsafe_allow_html=True,
-    )
-    return
+if "current_input" not in st.session_state:
+    st.session_state.current_input = None
 
-reconfig_chatinput()       
-##############################################################################
+def reset():
+    st.session_state.input_history = []
+    st.session_state.current_input = None
 
-with st.container():
-    text_color = st.selectbox("Text Color", ["white", "black", "blue", "green", "purple"])
-    user_inp = multimodal_chatinput(text_color=text_color)
+top = st.container()
+bottom = st.container()
 
-if user_inp:
-    st.write(user_inp)
+with st.sidebar:
+    text_color = st.selectbox("Text Color", ["black", "white", "blue", "green", "purple"])
+
+with bottom:
+    user_inp = multimodal_chatinput(text_color=text_color, key='zzz')
+
+with top:
+    history_without_current = [
+        inp for inp in st.session_state.input_history if inp != st.session_state.current_input
+    ]
+    if history_without_current:
+        st.markdown("# History")
+        for inp in history_without_current:
+            st.write(inp)
+
+    if any(user_inp.values()):
+        st.session_state.input_history.append(user_inp)
+        st.session_state.current_input = user_inp
+    else:
+        if st.session_state.current_input:
+            st.markdown("# Current")
+            st.write(st.session_state.current_input)
+            st.session_state.current_input = None
+
+reset_button = st.button("Reset", on_click=reset)
