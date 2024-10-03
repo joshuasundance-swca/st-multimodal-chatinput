@@ -43,16 +43,25 @@ class MultimodalChatInput extends StreamlitComponentBase<State> {
   };
 
   handleSubmit = () => {
+    // Step 1: Submit the current state to Streamlit
     Streamlit.setComponentValue({
       uploadedFiles: this.state.uploadedFiles,
       textInput: this.state.textInput
     });
 
-    // Clear state after sending
+    // Step 2: Clear the local state
     this.setState({
       uploadedFiles: [],
       textInput: ""
     });
+
+    // Step 3: Set the component value in Streamlit to an empty state after a delay
+    setTimeout(() => {
+      Streamlit.setComponentValue({
+        uploadedFiles: [],
+        textInput: ""
+      });
+    }, 100); // Adjust the delay as necessary
   };
 
   handlePaste = (event: React.ClipboardEvent<HTMLTextAreaElement>) => {
