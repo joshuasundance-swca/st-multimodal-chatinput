@@ -34,4 +34,5 @@ RUN python -m pip install build setuptools wheel
 COPY --from=streamlitapp /st_multimodal_chatinput /st_multimodal_chatinput
 WORKDIR /st_multimodal_chatinput
 COPY generate_artifacts.sh /st_multimodal_chatinput/generate_artifacts.sh
-CMD ["/bin/bash", "generate_artifacts.sh"]
+SHELL ["/bin/bash", "-euo", "pipefail", "-c"]
+CMD ["./generate_artifacts.sh"]
